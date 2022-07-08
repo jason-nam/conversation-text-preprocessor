@@ -1,8 +1,8 @@
 import pandas as pd
 from pathlib import Path
 
-FROM_PATH = Path('filter_file')
-TO_PATH = Path('filtered_file')
+FROM_PATH = Path('data/unfiltered_file')
+TO_PATH = Path('data/filtered_file')
 COLUMN_NAMES = ['index', 'dialogue_id', 'Q-3', 'Q-2', 'Q-1', 'A']
 
 def get_data(file_name):

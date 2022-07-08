@@ -1,4 +1,4 @@
-import filter_conversation.tokenize_conversation as tc
+import tokenize_conversation as tc
 from csv_handler import is_null
 
 A_MINIMUM_LENGTH = 5
