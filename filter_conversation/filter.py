@@ -1,5 +1,5 @@
 import data_util
-from filter_logic import is_bad_conversation
+from filter_conditions import is_bad_conversation
 
 import pathlib
 
