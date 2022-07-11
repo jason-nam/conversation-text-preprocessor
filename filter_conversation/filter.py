@@ -1,4 +1,4 @@
-import csv_handler
+import data_util
 from filter_logic import is_bad_conversation
 
 import pathlib
@@ -16,17 +16,17 @@ def main():
     # flist = [x for x in flist if x not in filtered_flist]
 
     for file in flist:
-        df = csv_handler.get_data(file)
+        df = data_util.get_data(file)
         delete_rows = []
 
         for i, row in df.iterrows():
             if is_bad_conversation(row):
                 delete_rows.append(i)
 
-        df = csv_handler.drop_row(df, delete_rows)
+        df = data_util.drop_row(df, delete_rows)
         print(len(delete_rows), 'rows deleted.')
 
-        csv_handler.write_data(df, file)
+        data_util.write_data(df, file)
         print(file, 'generated')
 
 if __name__ == "__main__":

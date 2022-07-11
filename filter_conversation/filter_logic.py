@@ -1,5 +1,5 @@
 import tokenizer as tc
-from csv_handler import is_null
+from data_util import is_null
 
 A_MINIMUM_LENGTH = 5
 ROW_INDEX = ['dialogue_id', 'Q-3', 'Q-2', 'Q-1', 'A']
