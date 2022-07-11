@@ -1,20 +1,33 @@
 import csv_handler
 from filter_logic import is_bad_conversation
 
-FILE_NAME = '7_dialogue_id_filter_double_turn.csv'
+import pathlib
+
+def get_filenames(path):
+    flist = []
+    for p in pathlib.Path(path).iterdir():
+        if p.is_file():
+            flist.append(p.name)
+    return flist
 
 def main():
-    df = csv_handler.get_data(FILE_NAME)
-    delete_rows = []
+    flist = get_filenames('../data/unfiltered_file')
+    # filtered_flist = get_filenames('../data/filtered_file')
+    # flist = [x for x in flist if x not in filtered_flist]
 
-    for i, row in df.iterrows():
-        if is_bad_conversation(row):
-            delete_rows.append(i)
+    for file in flist:
+        df = csv_handler.get_data(file)
+        delete_rows = []
 
-    df = csv_handler.drop_row(df, delete_rows)
-    print(len(delete_rows), 'rows deleted.')
+        for i, row in df.iterrows():
+            if is_bad_conversation(row):
+                delete_rows.append(i)
 
-    csv_handler.write_data(df, FILE_NAME)
+        df = csv_handler.drop_row(df, delete_rows)
+        print(len(delete_rows), 'rows deleted.')
+
+        csv_handler.write_data(df, file)
+        print(file, 'generated')
 
 if __name__ == "__main__":
     main()
