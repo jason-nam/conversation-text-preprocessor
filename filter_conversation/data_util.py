@@ -7,8 +7,11 @@ COLUMN_NAMES = ['index', 'dialogue_id', 'Q-3', 'Q-2', 'Q-1', 'A']
 
 def get_data(file_name):
     path = FROM_PATH/file_name
-    df = pd.read_csv(path)
-    return df
+    try:
+        df = pd.read_csv(path)
+        return df
+    except OSError:
+        print("Could not open/read file:", file_name)
 
 def drop_row(df, ind):
     df = df.drop(df.index[ind])
