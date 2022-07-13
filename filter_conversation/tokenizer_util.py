@@ -1,16 +1,18 @@
-import os
 import pathlib
-from transformers import AutoModel, AutoTokenizer
+from transformers import AutoTokenizer
 
-# cwd_path = os.getcwd()
+UNK = '[UNK]'
+
 path = pathlib.Path('../tokenizer')
-
-# model = AutoModel.from_pretrained("klue/bert-base")
-# tokenizer = AutoTokenizer.from_pretrained(cwd_path)
 tokenizer = AutoTokenizer.from_pretrained(path)
 
 def get_token(text):
     return tokenizer.tokenize(text)
+
+def contains_unk(tokenized_text):
+    if UNK in tokenized_text:
+        return True
+    return False
 
 def is_repeat(tokens):
     if len(tokens) == 0:
@@ -25,7 +27,6 @@ def is_repeat(tokens):
         prev_token = t
         if count >= 4:
             return True
-            
     return False
 
 if __name__ == "__main__":
