@@ -115,6 +115,8 @@ def contains_illegal_characters(row):
 
 def contains_short_utterance(row):
     for utterance in row[2:]:
+        if is_null(utterance):
+            continue
         if len(str(utterance)) <= MIN_UTTERANCE_LENGTH:
             return True
     return False
