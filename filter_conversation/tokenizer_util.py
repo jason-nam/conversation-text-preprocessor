@@ -31,3 +31,5 @@ def is_repeat(tokens):
 
 if __name__ == "__main__":
     None
+
+print(get_token('성원이 되었으므로 제삼백칠십구 회 국회임시회 제일 차 문화체육관광위원회를 개의하겠습니다.'))
