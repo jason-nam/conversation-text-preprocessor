@@ -1,7 +1,7 @@
 import data_util
 import util
 import pathlib
-from filter_conditions import is_bad_conversation
+from filter import is_bad_conversation
 
 PATH = '../data/unfiltered_file'
 flist_ = ['7_dialogue_id_filter_double_turn.csv']

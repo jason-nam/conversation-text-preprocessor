@@ -1,5 +1,4 @@
 import tokenizer_util as tc
-import itertools
 from data_util import is_null
 
 STIFF_DIALOGUE_ID = '감성대화말뭉치'
@@ -47,8 +46,6 @@ def contains_repeating_tokens(row):
             count = 0
     return False
 
-
-
 # def contains_sublist(lst, sublst):
 #     n = len(sublst)
 #     return any((sublst == lst[i:i+n]) for i in range(len(lst)-n+1))
@@ -62,7 +59,6 @@ def contains_repeating_tokens(row):
 #         ls2 = [element for element in lst2 if element in lst1]
 #         return ls1 == ls2
 
-
 #     def sublist2(lst1, lst2):
 #         def get_all_in(one, another):
 #             for element in one:
@@ -72,7 +68,6 @@ def contains_repeating_tokens(row):
 #             if x1 != x2:
 #                 return True
 #         return False
-
 
 #     def sublist3(lst1, lst2):
 #         from collections import Counter
@@ -90,8 +85,6 @@ def contains_repeating_tokens(row):
 #             return True
 #     return False
 
-
-
 def get_char_ratio(utterance):
     internet_term_count = 0
     for c in utterance:
@@ -107,7 +100,6 @@ def contains_stiff_dialogue(row):
     return False
 
 def contains_illegal_characters(row):
-    # illegal_character = get_special_characters()
     for utterance in row[2:]:
         if any(c in str(utterance) for c in illegal_characters):
             return True
@@ -150,12 +142,6 @@ def contains_stiff_phrases(row):
         if count > MAX_STIFF_WORD:
             return True
     return False
-
-# def get_special_characters():
-#     file = open(SPECIAL_CHARACTERS, 'r', encoding='UTF-8')
-#     data = file.read().replace('\n', ' ').split(' ')
-#     file.close()
-#     return data
 
 def is_bad_conversation(row):
     if contains_short_utterance(row) or contains_long_utterance(row):
