@@ -13,11 +13,5 @@ def print_result(dir, data, filtered_data):
             '\nREMAINING DATA:', filtered_data
     )
 
-def print_label():
-    print(r"""\ 
-
-            """                 
-    )
-
 if __name__ == "__main__":
     None

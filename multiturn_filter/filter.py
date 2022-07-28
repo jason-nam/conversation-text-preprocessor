@@ -1,20 +1,12 @@
-import data_util
+from soynlp.normalizer import *
 
-SPECIAL_CHARACTERS = 'special_characters.txt'
-MIN_UTTERANCE_LENGTH = 5
-MAX_UTTERANCE_LENGTH = 150
-
-file = open(SPECIAL_CHARACTERS, 'r', encoding='UTF-8')
-illegal_characters = file.read().replace('\n', ' ').split(' ')
-file.close()
-
-def is_short_utterance(utterance):
-    if len(str(utterance)) <= MIN_UTTERANCE_LENGTH:
+def is_short_utterance(utterance, min_utterance_len):
+    if len(str(utterance)) <= min_utterance_len:
         return True
     return False
 
-def is_long_utterance(utterance):
-    if len(str(utterance)) >= MAX_UTTERANCE_LENGTH:
+def is_long_utterance(utterance, max_utterance_len):
+    if len(str(utterance)) >= max_utterance_len:
         return True
     return False
 
@@ -33,12 +25,11 @@ def adjust_character_length(utterance, target, repeat_max):
     for i in reversed(del_ind):
         utterance = utterance[0:i] + utterance[i+1:]
     return utterance
-
-def remove_special_characters(utterance):
-    for illegal_char in illegal_characters:
-        utterance = utterance.replace(illegal_char, '')
-    return utterance
+def remove_special_characters(utterance, illegal_characters):
+    # for illegal_char in illegal_characters:
+    #     utterance = utterance.replace(illegal_char, '')
+    return only_text(utterance)
 
 if __name__ == "__main__":
-    print(adjust_character_length('ㅋㅋㅋㅋㅋㅋㅋ 그래? ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', 5))
-    print(remove_special_characters('그래서 나는 그 드라마를 봤어 %▒!?'))
+    print(adjust_character_length('ㅋㅋㅋㅋㅋㅋㅋ 그래? ㅋㅋㅋㅋㅋㅋㅋㅋㅋ',"ㅋ", 5))
+    print(remove_special_characters('그래서 나는 그 드라마를 봤어 %▒!?', [""]))
