@@ -25,10 +25,11 @@ def adjust_character_length(utterance, target, repeat_max):
     for i in reversed(del_ind):
         utterance = utterance[0:i] + utterance[i+1:]
     return utterance
+    
 def remove_special_characters(utterance, illegal_characters):
-    # for illegal_char in illegal_characters:
-    #     utterance = utterance.replace(illegal_char, '')
-    return only_text(utterance)
+    for illegal_char in illegal_characters:
+        utterance = utterance.replace(illegal_char, '')
+    return utterance
 
 if __name__ == "__main__":
     print(adjust_character_length('ㅋㅋㅋㅋㅋㅋㅋ 그래? ㅋㅋㅋㅋㅋㅋㅋㅋㅋ',"ㅋ", 5))

@@ -1,6 +1,28 @@
 import os
 import json
 
+def get_dirnames(path):
+    dirlist = []
+    try:
+        for dirname in os.listdir(path):
+            if os.path.isdir(os.path.join(path, dirname)):
+                dirlist.append(dirname)
+    except:
+        print(path, "does not exist")
+        raise
+    return dirlist
+
+def get_filenames(path):
+    flist = []
+    try:
+        for filename in os.listdir(path):
+            if os.path.isfile(os.path.join(path, filename)):
+                flist.append(filename)
+    except:
+        print(path, "does not exist")
+        raise
+    return flist
+
 def read_json(path):
     with open(path, 'r', encoding='utf-8-sig') as file:
         data = json.load(file)
