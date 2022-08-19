@@ -1,3 +1,5 @@
+"""Filter conversation datasets to improve meta human deep learning performance."""
+
 import os
 from typing import Dict, List, Optional
 import re
@@ -535,8 +537,6 @@ def main():
     for dirname in dirlist:
         flist = get_filenames(path=os.path.join(source_data_path, dirname)) # Load list of file names from dir.
         long_exception = "long_data"
-        eng_exception = "eng_data"
-        transformed_exception = "transformed_data"
         deleted_data = "deleted_data"
         single_utterance_data = "single_utterance_data"
         data_count = len(flist)
@@ -547,14 +547,6 @@ def main():
         if not os.path.exists(os.path.join(new_data_path, long_exception)):
             os.mkdir(os.path.join(new_data_path, long_exception)) # Make dir if target dir does not exist.
             print(f"Directory \"{os.path.join(new_data_path, long_exception)}\" generated.")
-
-        # if not os.path.exists(os.path.join(new_data_path, eng_exception)):
-        #     os.mkdir(os.path.join(new_data_path, eng_exception)) # Make dir if target dir does not exist.
-        #     print(f"Directory \"{os.path.join(new_data_path, eng_exception)}\" generated.")
-
-        # if not os.path.exists(os.path.join(new_data_path, transformed_exception)):
-        #     os.mkdir(os.path.join(new_data_path, transformed_exception)) # Make dir if target dir does not exist.
-        #     print(f"Directory \"{os.path.join(new_data_path, transformed_exception)}\" generated.")
 
         if not os.path.exists(os.path.join(new_data_path, deleted_data)):
             os.mkdir(os.path.join(new_data_path, deleted_data)) # Make dir if target dir does not exist.
@@ -573,11 +565,7 @@ def main():
         # Iterate over files in dir.
         for filename in tqdm(flist):
             short_utterance_count = 0
-            remove_data = False
-            is_eng = False
-            contains_special_char = False
-            is_long = False
-            transformed = False
+            remove_data, is_long = False, False
 
             # Load json conversation file.
             df = read_json(path=os.path.join(
@@ -658,22 +646,6 @@ def main():
                         filename=filename
                     )
                     remaining_data_count += 1
-            
-                # # Write conversation json file to english exceptions dir for further analysis if is_eng is True.
-                # if is_eng:
-                #     write_json(
-                #         data=df, 
-                #         dirname=eng_exception, 
-                #         filename=filename
-                #     )
-                # # Not implemented yet.
-                # if transformed:
-                #     #
-                #     write_json(
-                #         data=df, 
-                #         dirname=transformed_exception, 
-                #         filename=filename
-                #     )
             else:
                 write_json(
                     data=df, 
