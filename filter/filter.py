@@ -584,8 +584,7 @@ def main():
                     )
 
                 # Replace all "OO님" sequence with "당신" if conversation is from AIHub.
-                if df[ind]['id'].startswith("감성대화말뭉치"):
-                    df[ind]['utterance'] = df[ind]['utterance'].replace("OO님", "당신")
+                df[ind]['utterance'] = df[ind]['utterance'].replace("OO님", "당신")
 
                 # Remove special characters from utterance.
                 df[ind]['utterance'] = only_text(df[ind]['utterance'])
